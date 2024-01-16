@@ -1,9 +1,12 @@
 import { prisma } from "~/db.server";
 
-type Post = {
+/*
+interface Post {
     slug: string;
     title: string;
-  };
+    markdown: string;
+  }*/
+  
 
   export async function getPosts() {
     return prisma.post.findMany();
@@ -28,6 +31,6 @@ type Post = {
     return prisma.post.findUnique({ where: { slug } });
   }
 
-  export async function createPost(post) {
+  export async function createPost(post: { title: string; slug: string; markdown: string; }) {
     return prisma.post.create({ data: post });
   }
